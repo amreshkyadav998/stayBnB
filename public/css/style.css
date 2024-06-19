@@ -1,0 +1,118 @@
+body{
+    /* background-color: pink; */
+      font-family: "Plus Jakarta Sans", sans-serif !important;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+} 
+
+.container{
+    flex: 1;
+}
+
+/* Navbar */
+.navbar{
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+/* Footer */
+
+.f-info-links a{
+    text-decoration: none;
+    color: white;
+    gap: 10px;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials , .f-info-brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i{
+    margin-right: 1em;
+    font-size: 1.2rem;
+    background-color: #fe424d;
+}
+
+.f-info{
+    text-align: center;
+    height: 8rem;
+    background-color: #20263e;
+    display: flex;
+    flex-wrap: wrap;
+    color: white;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* index.ejs */
+.custom-img-height {
+    height: 400px;
+    object-fit: cover; /* This ensures the image covers the area without distorting */
+    z-index: 1; /* Make sure image is below the dropdown */
+    position: relative;
+}
+
+/* card */
+.listing-card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+  border-radius: 1rem !important; 
+  width: 100% !important; 
+  object-fit: cover !important;
+}
+
+.card-body{
+    padding: 0 !important;
+}
+
+.card-text p{
+    font-weight: 400;
+}
+
+/* New Page */
+.add-btn{
+    background-color: #fe424d !important;
+    border: none !important;
+    padding: 10px !important;
+    width: 18% !important;
+    font-size: 18px !important;
+}
+.add-btn:hover{
+    background-color:#21c9c4 !important;
+}
+
+@media(max-width:372px){
+    .add-btn{
+        width: 90px !important;
+    }
+}
+/* Show image */
+.show-img{
+    height: 45vh;
+}
+
+.btn-group{
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
