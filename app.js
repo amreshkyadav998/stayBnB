@@ -7,6 +7,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const listingsRoutes = require('./routes/listing.js');
 const reviewRoutes = require('./routes/review.js');
@@ -34,15 +36,40 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+ const sessionOptions = {
+    secret: "mysupersecretcode",
+    resave : false , 
+    saveUninitialized : true,
+    cookie : {
+        expires : Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge : 1000 * 60 * 60 * 24 * 7,
+        httpOnly : true,
+    }
+ }
+
+
+ 
+ // Root Route
+app.get("/", (req, res) => {
+    res.redirect("I am the root");
+});
+
+ app.use(session(sessionOptions));
+ app.use(flash());
+
+
+app.use((req,res,next ) =>{
+    res.locals.successMsg = req.flash("success");
+    res.locals.errorMsg = req.flash("error");
+    next();
+})
+
 // Use the listings routes
 app.use('/listings', listingsRoutes);
 //Use the review routes
 app.use('/listings/:id/reviews', reviewRoutes);
 
-// Root Route
-app.get("/", (req, res) => {
-    res.redirect("/listings");
-});
 
 // Catch-all Route for 404 Errors
 app.all("*", (req, res, next) => {
