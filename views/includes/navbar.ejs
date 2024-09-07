@@ -1,5 +1,5 @@
 <style>
- body {
+body {
   font-family: 'Arial', sans-serif;
 }
 
@@ -68,10 +68,12 @@
 
 .stylish-navbar .navbar-nav .btn-login-signup {
   margin-left: 15px;
+  gap: 20px;
 }
 
 .stylish-navbar .btn-login,
-.stylish-navbar .btn-signup {
+.stylish-navbar .btn-signup,
+.stylish-navbar .btn-logout {
   border-radius: 30px;
   padding: 0.4rem 1.5rem;
   transition: all 0.3s ease;
@@ -98,6 +100,37 @@
 .stylish-navbar .btn-signup:hover {
   background-color: #007bff;
   color: white;
+}
+
+.stylish-navbar .btn-logout {
+  background-color: #dc3545; /* Red background */
+  color: white;
+}
+
+.stylish-navbar .btn-logout:hover {
+  background-color: #c82333; /* Darker red on hover */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (min-width: 769px) {
+  .stylish-navbar .navbar-nav {
+    margin-left: auto;
+  }
+
+  .stylish-navbar .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .stylish-navbar .navbar-nav .nav-link::before {
+    height: 3px; /* Default line height */
+  }
+
+  .stylish-navbar .btn-login,
+  .stylish-navbar .btn-signup {
+    gap: 20px; /* Add gap between buttons */
+    margin-left: 15px; /* Add left margin */
+  }
 }
 
 @media (max-width: 768px) {
@@ -160,6 +193,8 @@
     height: 20px;
   }
 }
+
+
 </style>
 
 <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top stylish-navbar">
