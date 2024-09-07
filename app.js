@@ -9,9 +9,13 @@ const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const User = require("./models/user.js");
 
 const listingsRoutes = require('./routes/listing.js');
 const reviewRoutes = require('./routes/review.js');
+const userRoutes = require('./routes/user.js');
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/stayBnB";
 
@@ -58,17 +62,39 @@ app.get("/", (req, res) => {
  app.use(session(sessionOptions));
  app.use(flash());
 
+ app.use(passport.initialize());
+ app.use(passport.session());
+ passport.use(new LocalStrategy(User.authenticate()));
+
+ passport.serializeUser(User.serializeUser());
+ passport.deserializeUser(User.deserializeUser());
+
 
 app.use((req,res,next ) =>{
+    res.locals.user = req.user; // Make the user object available in the views
     res.locals.successMsg = req.flash("success");
     res.locals.errorMsg = req.flash("error");
     next();
 })
 
+
+
+// app.get("/demouser" , async(req,res) =>{
+//     let fakeUser = new User({
+//         email: "amy@gmail.com",
+//         username : "Amresh"
+//     });
+
+//    let registeredUser = await User.register(fakeUser , "helloworld");
+//    res.send(registeredUser);
+// })
+
 // Use the listings routes
 app.use('/listings', listingsRoutes);
 //Use the review routes
 app.use('/listings/:id/reviews', reviewRoutes);
+//Use the user Routes
+app.use("/" , userRoutes);
 
 
 // Catch-all Route for 404 Errors

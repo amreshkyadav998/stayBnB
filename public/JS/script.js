@@ -16,3 +16,15 @@
       }, false)
     })
   })()
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const body = document.querySelector('body');
+  
+    if (navbarToggler) {
+      navbarToggler.addEventListener('click', () => {
+        body.classList.toggle('blur');
+      });
+    }
+  });
+  

@@ -1,15 +1,188 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/"><i class="fa-regular fa-compass"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link"  href="/">Home</a>
-          <a class="nav-link" href="/listings">All Listings</a>
-          <a class="nav-link" href="/listings/new">Add new Listing</a>
-        </div>
+<style>
+ body {
+  font-family: 'Arial', sans-serif;
+}
+
+.stylish-navbar {
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stylish-navbar .navbar-brand {
+  font-size: 1.5rem;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.stylish-navbar .navbar-brand:hover {
+  color: #007bff;
+}
+
+.stylish-navbar .navbar-nav .nav-link {
+  font-size: 1rem;
+  color: #333;
+  position: relative;
+  transition: color 0.3s ease;
+  padding: 0.5rem 1rem;
+}
+
+.stylish-navbar .navbar-nav .nav-link::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: #007bff;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out;
+}
+
+.stylish-navbar .navbar-nav .nav-link:hover {
+  color: #007bff;
+}
+
+.stylish-navbar .navbar-nav .nav-link:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+.stylish-navbar .navbar-toggler {
+  background-color: blue;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.stylish-navbar .navbar-toggler:hover {
+  transform: rotate(90deg);
+  background-color: #007bff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.stylish-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' fill='currentColor' class='bi bi-list' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M3 12.5a.5.5 0 0 0 0 1h10a.5.5 0 0 0 0-1H3zm0-5a.5.5 0 0 0 0 1h10a.5.5 0 0 0 0-1H3zm0-5a.5.5 0 0 0 0 1h10a.5.5 0 0 0 0-1H3z'/%3E%3C/svg%3E");
+  filter: invert(1);
+}
+
+.stylish-navbar .navbar-nav .btn-login-signup {
+  margin-left: 15px;
+}
+
+.stylish-navbar .btn-login,
+.stylish-navbar .btn-signup {
+  border-radius: 30px;
+  padding: 0.4rem 1.5rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem; /* Adjust font size */
+  display: inline-block; /* Ensure buttons are inline */
+}
+
+.stylish-navbar .btn-login {
+  background-color: #007bff;
+  color: white;
+}
+
+.stylish-navbar .btn-login:hover {
+  background-color: #0056b3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.stylish-navbar .btn-signup {
+  background-color: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+.stylish-navbar .btn-signup:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .stylish-navbar .navbar-nav .nav-link {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  .stylish-navbar .navbar-nav {
+    text-align: center; /* Center the nav links */
+  }
+
+  .stylish-navbar .navbar-nav .nav-link::before {
+    height: 2px; /* Thinner line */
+  }
+
+  .stylish-navbar .btn-login,
+  .stylish-navbar .btn-signup {
+    display: inline-block;
+    width: auto; /* Allow width to adjust based on content */
+    margin-top: 10px;
+    text-align: center; /* Center text */
+  }
+}
+
+@media (max-width: 400px) {
+  .stylish-navbar .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .stylish-navbar .navbar-nav .nav-link {
+    font-size: 0.9rem;
+    padding: 0.3rem;
+  }
+
+  .stylish-navbar .navbar-nav .nav-link::before {
+    height: 1px; /* Even thinner line */
+  }
+
+  .stylish-navbar .btn-login,
+  .stylish-navbar .btn-signup {
+    font-size: 0.8rem; /* Smaller font size */
+    padding: 0.3rem 1rem;
+    width: auto; /* Allow width to adjust based on content */
+    margin: 5px; /* Small margin for spacing */
+  }
+
+  .stylish-navbar .navbar-collapse {
+    text-align: center;
+  }
+
+  .stylish-navbar .navbar-toggler {
+    width: 40px;
+    height: 40px;
+  }
+
+  .stylish-navbar .navbar-toggler-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top stylish-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav mx-auto"> <!-- Center nav links -->
+        <a class="nav-link" href="/listings">Home</a>
+        <a class="nav-link" href="/listings">All Listings</a>
+        <a class="nav-link" href="/listings/new">Add new Listing</a>
+      </div>
+      <div class="ms-auto d-flex flex-column flex-md-row align-items-center justify-content-center"> <!-- Center buttons -->
+        <!-- Conditionally render login/signup or logout based on authentication state -->
+        <% if (user) { %>
+          <a href="/logout" class="btn btn-logout btn-login-signup">Logout</a>
+        <% } else { %>
+          <a href="/login" class="btn btn-login btn-login-signup">Login</a>
+          <a href="/signup" class="btn btn-signup btn-login-signup">Sign Up</a>
+        <% } %>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>
