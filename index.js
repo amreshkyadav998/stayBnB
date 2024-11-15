@@ -21,19 +21,23 @@ const userRoutes = require('./routes/user.js');
 require("dotenv").config();
 
 // Connect to MongoDB
-const MONGO_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT;
 
 // Connect to MongoDB
-main().then(() => {
-    console.log("Connection successful");
-}).catch((err) => {
-    console.log(err);
-});
+const mongoose = require("mongoose");
+
+const MONGO_URL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/stayBnB"; 
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+    try {
+        await mongoose.connect(MONGO_URL);
+        console.log("MongoDB connected");
+    } catch (err) {
+        console.error("MongoDB connection failed:", err);
+    }
 }
+
+main();
 
 // Set EJS as the view engine and configure views path
 app.set("view engine", "ejs");
