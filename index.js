@@ -61,7 +61,8 @@ app.use(express.static(path.join(__dirname, "/public")));
  
  // Root Route
 app.get("/", (req, res) => {
-    res.redirect("I am the root");
+    res.redirect("/listings");
+    // res.send("root");
 });
 
  app.use(session(sessionOptions));
@@ -109,9 +110,11 @@ app.all("*", (req, res, next) => {
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {
-    const { statusCode = 500, message = "Something went wrong!" } = err;
-    res.status(statusCode).render("error", { message, statusCode });
+    res.status(501).render("error", { 
+        message: err.message || "Something went wrong!" 
+    });
 });
+
 
 // Start the server
 app.listen(PORT, () => {
